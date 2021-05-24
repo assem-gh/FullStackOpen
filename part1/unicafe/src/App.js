@@ -12,6 +12,8 @@ const App = () => {
     const [neutral, setNeutral] = useState(0)
     const [bad, setBad] = useState(0)
 
+    const all = good + bad + neutral
+
     // Eventhandlers Functions:
     // good
     const handleGoodClick = () => setGood(good + 1)
@@ -19,6 +21,7 @@ const App = () => {
     const handleNeutralClick = () => setNeutral(neutral + 1)
     // bad
     const handleBadClick = () => setBad(bad + 1)
+
 
     return (
         <div>
@@ -31,6 +34,9 @@ const App = () => {
                 <li>good {good} </li>
                 <li>neutral {neutral}</li>
                 <li>bad {bad}</li>
+                <li>all {all}</li>
+                <li>average {(good - bad) / all}</li>
+                <li>positive {good / all * 100} %</li>
             </ul>
 
         </div>
