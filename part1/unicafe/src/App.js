@@ -26,6 +26,8 @@ const App = () => {
     const handleNeutralClick = () => setFeedback({ ...feedback, neutral: neutral + 1 })
     // bad
     const handleBadClick = () => setFeedback({ ...feedback, bad: bad + 1 })
+
+
     // Condition rendering
     const Statisitics = () => {
         if (good || bad || neutral) {
@@ -43,6 +45,8 @@ const App = () => {
         }
         return <p>No feedback given</p>
     }
+
+
     return (
         <div>
             <h1>give feedback</h1>
