@@ -2,8 +2,11 @@ import './App.css';
 import { React, useState } from 'react'
 
 
-// Statistic Component
-const Statistics = ({ text, eventHandler }) => <button onClick={eventHandler}>{text}</button>
+// Button Component
+const Button = ({ text, eventHandler }) => <button onClick={eventHandler}>{text}</button>
+
+// Statisitic Component
+const Statisitic = ({ text, stat }) => <li >{text} {stat}</li>
 
 // App Component
 const App = () => {
@@ -26,17 +29,17 @@ const App = () => {
     return (
         <div>
             <h1>give feedback</h1>
-            <Statistics text='good' eventHandler={handleGoodClick} />
-            <Statistics text='neutral' eventHandler={handleNeutralClick} />
-            <Statistics text='bad' eventHandler={handleBadClick} />
+            <Button text='good' eventHandler={handleGoodClick} />
+            <Button text='neutral' eventHandler={handleNeutralClick} />
+            <Button text='bad' eventHandler={handleBadClick} />
             <h1>statistics</h1>
             <ul>
-                <li>good {good} </li>
-                <li>neutral {neutral}</li>
-                <li>bad {bad}</li>
-                <li>all {all}</li>
-                <li>average {(good - bad) / all}</li>
-                <li>positive {good / all * 100} %</li>
+                <Statisitic text='good' stat={good} />
+                <Statisitic text='neutral' stat={neutral} />
+                <Statisitic text='bad' stat={bad} />
+                <Statisitic text='all' stat={all} />
+                <Statisitic text='average' stat={(good - bad) / all} />
+                <Statisitic text='positive' stat={good / all * 100 + ' %'} />
             </ul>
 
         </div>
