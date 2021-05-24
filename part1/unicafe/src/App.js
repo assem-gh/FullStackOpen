@@ -26,7 +26,27 @@ const App = () => {
     const handleBadClick = () => setBad(bad + 1)
 
 
-    return (
+    if (good || bad || neutral) {
+        return (
+            <div>
+                <h1>give feedback</h1>
+                <Button text='good' eventHandler={handleGoodClick} />
+                <Button text='neutral' eventHandler={handleNeutralClick} />
+                <Button text='bad' eventHandler={handleBadClick} />
+                <h1>statistics</h1>
+                <ul>
+
+                    <Statisitic text='good' stat={good} />
+                    <Statisitic text='neutral' stat={neutral} />
+                    <Statisitic text='bad' stat={bad} />
+                    <Statisitic text='all' stat={all} />
+                    <Statisitic text='average' stat={(good - bad) / all} />
+                    <Statisitic text='positive' stat={good / all * 100 + ' %'} />
+                </ul>
+
+            </div>
+        )
+    } else return (
         <div>
             <h1>give feedback</h1>
             <Button text='good' eventHandler={handleGoodClick} />
@@ -34,16 +54,9 @@ const App = () => {
             <Button text='bad' eventHandler={handleBadClick} />
             <h1>statistics</h1>
             <ul>
-                <Statisitic text='good' stat={good} />
-                <Statisitic text='neutral' stat={neutral} />
-                <Statisitic text='bad' stat={bad} />
-                <Statisitic text='all' stat={all} />
-                <Statisitic text='average' stat={(good - bad) / all} />
-                <Statisitic text='positive' stat={good / all * 100 + ' %'} />
+                <li>No feedback given</li>
             </ul>
-
-        </div>
-    )
+        </div>)
 }
 
 export default App
