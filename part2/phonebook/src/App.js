@@ -7,7 +7,13 @@ const App = () => {
 
 
     const handleInput = (e) => {
-        setNewName(e.target.value)
+        persons.forEach(person => {
+            if (person.name === e.target.value) {
+                window.alert(`${newName} is already added to phonebook`)
+                setNewName('')
+            }
+            else setNewName(e.target.value)
+        })
     }
 
     const handleSubmit = (e) => {
