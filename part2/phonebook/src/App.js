@@ -38,9 +38,17 @@ const App = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        persons.some(person => person.name === newName)
-            ? window.alert(`${newName} is already added to phonebook`)
-            : setPersons([...persons, { name: newName, number: newNumber }])
+        const isPersonAdded = persons.some(person => person.name === newName)
+        if (isPersonAdded) window.alert(`${newName} is already added to phonebook`)
+        else {
+            axios
+                .post('http://localhost:3001/persons', { name: newName, number: newNumber })
+                .then(response => {
+                    console.log(response.data)
+                    setPersons([...persons, response.data])
+                    console.log(persons)
+                })
+        }
         setNewName('')
         setNewNumber('')
     }
