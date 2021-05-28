@@ -1,28 +1,14 @@
 import './App.css';
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import CountryItem from './components/countryItem'
+import CountryIView from './components/countryView'
 
 
-
-const Country = ({ name, capital, population, languages, flag }) => {
-    return (
-        <>
-            <h1>{name}</h1>
-            <p>capital {capital}</p>
-            <p>populatin {population}</p>
-            <h3>Languages</h3>
-            <ul>
-                {languages.map(language => <li>{language.name}</li>)}
-            </ul>
-            <img src={flag} alt='flag' className='image' />
-        </>
-    )
-}
 function App() {
     const [search, setSearch] = useState('')
     const [countries, setcountries] = useState([])
     const [filteredCountries, setFilteredCountries] = useState([])
-
 
     useEffect(() => {
         axios
@@ -36,28 +22,20 @@ function App() {
     const changeHandler = (e) => {
         setSearch(e.target.value)
         if (e.target.value) {
-            setFilteredCountries(countries.filter(country => country.name.toLowerCase().includes(e.target.value.toLowerCase())));
-        }
-        console.log('search', search, 'filterd: ', filteredCountries)
-    }
-
-    const renderCountryInfo = () => {
-        switch (true) {
-            case filteredCountries.length === 0:
-                return;
-            case filteredCountries.length === 1:
-                return <Country {...filteredCountries[0]} />;
-            case filteredCountries.length < 10:
-                return filteredCountries.map(country => <li>{country.name}</li>);
-            default:
-                return <p>Too many matches, specify another filter</p>
-        }
+            const regex = new RegExp(e.target.value, 'i')
+            const newFilteredcountries = countries.filter(country => country.name.match(regex))
+            setFilteredCountries(newFilteredcountries);
+        } else setFilteredCountries([])
     }
 
     return (
         <div className="App">
             find countries : <input value={search} onChange={changeHandler} />
-            {renderCountryInfo()}
+            { filteredCountries.length === 0 && <p></p>}
+            {filteredCountries.length === 1 && <CountryIView {...filteredCountries[0]} />}
+            { filteredCountries.length <= 10 && filteredCountries.length > 1 && filteredCountries.map(country => <CountryItem country={country} />)}
+            {  filteredCountries.length > 10 && <p>Too many matches, specify another filter</p>}
+
         </div>
     );
 }
