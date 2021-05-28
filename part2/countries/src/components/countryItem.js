@@ -1,4 +1,4 @@
-import CountryIView from './countryView'
+import CountryInfo from './countryinfo'
 import { useState } from 'react'
 
 
@@ -9,7 +9,7 @@ const CountryItem = ({ country }) => {
     return (
         <li>
             {country.name} <button onClick={showHandler}>Show</button>
-            {display && <CountryIView {...country} />}
+            {display && <CountryInfo {...country} />}
         </li>
     )
 }
