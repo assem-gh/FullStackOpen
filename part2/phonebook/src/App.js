@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Persons from './component/persons'
 import Filter from './component/filter'
 import PersonForm from './component/personform'
-import axios from 'axios'
-import { getAllPersons, create } from './services/persons'
+import { getAllPersons, create, removeName } from './services/personsServices'
 
 const App = () => {
     const [persons, setPersons] = useState([])
@@ -47,7 +46,13 @@ const App = () => {
         setNewName('')
         setNewNumber('')
     }
-
+    const deletEntry = personToDelete => {
+        if (window.confirm(`Delete ${personToDelete.name}?`)) {
+            removeName(personToDelete.id).then(response => console.log(response.data))
+            setTimeout(() => window.alert(`${personToDelete.name} was Succefully deleted`), 0)
+            setPersons(persons.filter(person => person.id !== personToDelete.id))
+        }
+    }
     return (
         <div>
             <h2>Phonebook</h2>
@@ -57,7 +62,7 @@ const App = () => {
             <PersonForm handleSubmit={handleSubmit} newName={newName}
                 newNumber={newNumber} handleInput={handleInput} />
             <h3>Numbers</h3>
-            <Persons persons={PersonsToShow} />
+            <Persons persons={PersonsToShow} deletEntry={deletEntry} />
         </div>
     )
 }

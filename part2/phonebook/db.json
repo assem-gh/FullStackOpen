@@ -14,31 +14,6 @@
       "name": "Dan Abramov",
       "number": "12-43-234345",
       "id": 3
-    },
-    {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": 4
-    },
-    {
-      "name": "John adam",
-      "number": "123-456-789",
-      "id": 5
-    },
-    {
-      "name": "Rachael Carson",
-      "number": "545-65654",
-      "id": 6
-    },
-    {
-      "name": "Jim Brown",
-      "number": "456363646",
-      "id": 7
-    },
-    {
-      "name": "Larry Spencer",
-      "number": "675456756",
-      "id": 8
     }
   ]
 }
