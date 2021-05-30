@@ -13,6 +13,9 @@ const removeName = (id,) => {
     const request = axios.delete(`${baseUrl}/${id}`)
     return request.then(response => response.data)
 }
+const update = (id, personToUpdate) => {
+    const request = axios.put(`${baseUrl}/${id}`, personToUpdate)
+    return request.then(response => response.data)
+}
 
-
-export { getAllPersons, create, removeName }
+export { getAllPersons, create, removeName, update }

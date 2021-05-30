@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Persons from './component/persons'
 import Filter from './component/filter'
 import PersonForm from './component/personform'
-import { getAllPersons, create, removeName } from './services/personsServices'
+import { getAllPersons, create, removeName, update } from './services/personsServices'
 
 const App = () => {
     const [persons, setPersons] = useState([])
@@ -36,11 +36,18 @@ const App = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const isPersonAdded = persons.some(person => person.name === newName)
-        if (isPersonAdded) window.alert(`${newName} is already added to phonebook`)
-        else {
-            const newPerson = { name: newName, number: newNumber }
-            create(newPerson)
-                .then(returnedNewPerson => setPersons([...persons, returnedNewPerson]))
+        if (isPersonAdded) {
+            const newPersonEntry = persons.find(person => person.name === newName)
+            const personToUpdate = { ...newPersonEntry, number: newNumber }
+            console.log('update', personToUpdate)
+            if (window.confirm(`${newName} is already added to phonebook,replace the old number with new one?`)) {
+                update(personToUpdate.id, personToUpdate)
+                    .then(updatedPerson => setPersons(persons.map(person =>
+                        person.id === updatedPerson.id ? updatedPerson : person)))
+            }
+        } else {
+            const personToAdd = { name: newName, number: newNumber }
+            create(personToAdd).then(addedPerson => setPersons([...persons, addedPerson]))
 
         }
         setNewName('')
@@ -49,7 +56,6 @@ const App = () => {
     const deletEntry = personToDelete => {
         if (window.confirm(`Delete ${personToDelete.name}?`)) {
             removeName(personToDelete.id).then(response => console.log(response.data))
-            setTimeout(() => window.alert(`${personToDelete.name} was Succefully deleted`), 0)
             setPersons(persons.filter(person => person.id !== personToDelete.id))
         }
     }
