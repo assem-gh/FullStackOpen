@@ -1,15 +1,17 @@
 import './App.css';
 import React, { useState, useEffect } from 'react'
-import Persons from './component/persons'
-import Filter from './component/filter'
-import PersonForm from './component/personform'
+import Persons from './component/Persons'
+import Filter from './component/Filter'
+import PersonForm from './component/Personform'
 import { getAllPersons, create, removeName, update } from './services/personsServices'
+import Notification from './component/Notification'
 
 const App = () => {
     const [persons, setPersons] = useState([])
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
     const [nameFilter, setNameFilter] = useState('')
+    const [message, setMessage] = useState(null)
 
     useEffect(() => {
         getAllPersons().then(initialPersons => setPersons(initialPersons))
@@ -39,15 +41,22 @@ const App = () => {
         if (isPersonAdded) {
             const newPersonEntry = persons.find(person => person.name === newName)
             const personToUpdate = { ...newPersonEntry, number: newNumber }
-            console.log('update', personToUpdate)
             if (window.confirm(`${newName} is already added to phonebook,replace the old number with new one?`)) {
                 update(personToUpdate.id, personToUpdate)
-                    .then(updatedPerson => setPersons(persons.map(person =>
-                        person.id === updatedPerson.id ? updatedPerson : person)))
+                    .then(updatedPerson => {
+                        setPersons(persons.map(person => person.id === updatedPerson.id ? updatedPerson : person))
+                        setMessage(` ${updatedPerson.name} was successfully updated`)
+                        setTimeout(() => setMessage(null), 5000)
+                    })
             }
         } else {
             const personToAdd = { name: newName, number: newNumber }
-            create(personToAdd).then(addedPerson => setPersons([...persons, addedPerson]))
+            create(personToAdd).then(addedPerson => {
+                setPersons([...persons, addedPerson])
+                setMessage(`Added ${addedPerson.name}`)
+                setTimeout(() => setMessage(null), 5000)
+            })
+
 
         }
         setNewName('')
@@ -62,8 +71,8 @@ const App = () => {
     return (
         <div>
             <h2>Phonebook</h2>
+            <Notification message={message} />
             <Filter filter={nameFilter} filterHandler={handleFilter} />
-
             <h3>Add a new</h3>
             <PersonForm handleSubmit={handleSubmit} newName={newName}
                 newNumber={newNumber} handleInput={handleInput} />

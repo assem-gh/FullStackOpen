@@ -1,7 +1,6 @@
-import Person from './person'
+import Person from './Person'
 
 const Persons = ({ persons, deletEntry }) => {
-    console.log(deletEntry)
     return (
         <ul>{persons.map(person => <Person key={person.id} person={person} deletEntry={deletEntry} />)}</ul>)
 }
