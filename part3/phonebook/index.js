@@ -27,15 +27,24 @@ let personsData = [
 app.get('/', (request, response) => {
     response.send('<h1>Hello</h1>')
 })
+
 app.get('/api/persons', (request, response) => {
     response.json(personsData)
 })
+
+app.get('/api/persons/:id', (request, response) => {
+    const id = +request.params.id
+    const person = personsData.find(person => person.id === id)
+    person ? response.json(person) : response.status(404).end()
+})
+
 app.get('/info', (request, response) => {
     const personsNumber = personsData.length
     const date = new Date
-    response.send(`<p>Phonebook has info for ${personsNumber} people<p/> \n
+    response.send(`<p>Phonebook has info for ${personsNumber} people<p/> 
    <p> ${date}</p> `)
 })
+
 const PORT = 3001
 app.listen((PORT), () => {
     console.log('server running on ', PORT)
