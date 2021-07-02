@@ -1,7 +1,11 @@
 const { request, response } = require('express')
 const express = require('express')
+const morgan = require('morgan')
+
+
 const app = express()
 app.use(express.json())
+app.use(morgan('tiny'))
 
 let personsData = [
     {
@@ -26,6 +30,8 @@ let personsData = [
     }
 ]
 const generateID = () => Math.floor(Math.random() * (10000 - 5) + 5)
+
+
 app.get('/', (request, response) => {
     response.send('<h1>Hello</h1>')
 })
@@ -54,7 +60,7 @@ app.post('/api/persons', (request, response) => {
     if (!body.number) response.status(400).json({ error: 'number is missing' })
 
     if (names.includes(body.name)) response.status(400).json({ error: 'name must be unique' })
-    console.log(names)
+
     const personToAdd = {
         name: body.name,
         number: body.number,
