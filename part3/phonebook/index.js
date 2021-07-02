@@ -42,13 +42,19 @@ app.get('/api/persons/:id', (request, response) => {
 
 app.delete('/api/persons/:id', (request, response) => {
     const id = +request.params.id
-    const persons = personsData.filter(person => person.id !== id)
+    personsData = personsData.filter(person => person.id !== id)
     response.status(204).end()
 })
 app.post('/api/persons', (request, response) => {
     const body = request.body
-    console.log(request.body)
-    if (!body.name || !body.number) response.status(400).json({ error: 'no input' })
+    const names = personsData.map(person => person.name)
+
+    if (!body.name) response.status(400).json({ error: 'name is missing' })
+
+    if (!body.number) response.status(400).json({ error: 'number is missing' })
+
+    if (names.includes(body.name)) response.status(400).json({ error: 'name must be unique' })
+    console.log(names)
     const personToAdd = {
         name: body.name,
         number: body.number,
