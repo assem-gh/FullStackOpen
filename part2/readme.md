@@ -1,6 +1,6 @@
 ## Part 2 - [Communicating with server](https://fullstackopen.com/en/part2)
 
-### [course-contents](https://github.com/Asem259/FullStackOpen/tree/main/part2/courseinfo)
+### [courseinfo](https://github.com/Asem259/FullStackOpen/tree/main/part2/courseinfo)
 
 - Exercises 2.1 - 2.5 — [Exercise Link](https://fullstackopen.com/en/part2/rendering_a_collection_modules#exercises-2-1-2-5)
 
