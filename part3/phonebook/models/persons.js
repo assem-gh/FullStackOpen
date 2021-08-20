@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator');
 
 
 const url = process.env.MONGODB_URI
@@ -13,9 +14,18 @@ mongoose.connect(url,
     .catch(err => console.log(err.message))
 
 const personSchema = new mongoose.Schema({
-    name: String,
-    number: String,
+    name: {
+        type: String,
+        minLength: 3,
+        unique: true,
+    },
+    number: {
+        type: String,
+        minLength: 8
+    },
 })
+//Add unique validator plugin
+personSchema.plugin(uniqueValidator);
 
 const Person = mongoose.model('Person', personSchema)
 
