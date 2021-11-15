@@ -36,3 +36,12 @@ This repository contains solutions to the Full Stack Open 2021 exercises from fr
 - Validation and ESLint
 
 [Solutions](https://github.com/Asem259/FullStackOpen/tree/main/part3/phonebook)
+
+## Part 4 - [Testing Express servers, user administration](https://fullstackopen.com/en/part4)
+
+- Structure of backend application
+- Testing the backend
+- User administration
+- Token authentication
+
+[Solutions](https://github.com/Asem259/FullStackOpen/tree/main/part4)
