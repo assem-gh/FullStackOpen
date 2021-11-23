@@ -1,38 +1,26 @@
 module.exports = {
-  'env': {
-    'commonjs': true,
-    'es2021': true,
-    'node': true
+  env: {
+    commonjs: true,
+    es2021: true,
+    node: true,
+    jest: true,
   },
-  'extends': 'eslint:recommended',
-  'parserOptions': {
-    'ecmaVersion': 'latest'
+  extends: 'eslint:recommended',
+  parserOptions: {
+    ecmaVersion: 'latest',
   },
-  'rules': {
-    'indent': [
-      'error',
-      2
-    ],
+  rules: {
+    indent: ['error', 2],
     'linebreak-style': [
       'error',
-      process.platform === 'win32' ? 'windows' : 'unix'
+      process.platform === 'win32' ? 'windows' : 'unix',
     ],
-    'quotes': [
-      'error',
-      'single'
-    ],
-    'semi': [
-      'error',
-      'never'
-    ],
-    'eqeqeq': 'error',
+    quotes: ['error', 'single'],
+    semi: ['error', 'always'],
+    eqeqeq: 'error',
     'no-trailing-spaces': 'error',
-    'object-curly-spacing': [
-      'error', 'always'
-    ],
-    'arrow-spacing': [
-      'error', { 'before': true, 'after': true }
-    ],
-    'no-unused-vars': 'off'
-  }
-}
+    'object-curly-spacing': ['error', 'always'],
+    'arrow-spacing': ['error', { before: true, after: true }],
+    'no-unused-vars': 'off',
+  },
+};
