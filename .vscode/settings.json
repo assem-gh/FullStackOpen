@@ -1,3 +1,8 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "javascript.preferences.quoteStyle": "single",
+  "html.completion.attributeDefaultValue": "singlequotes",
+  "editor.formatOnSave": true,
+  "typescript.preferences.quoteStyle": "single",
+  "prettier.singleQuote": true
 }
