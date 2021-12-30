@@ -12,4 +12,20 @@ blogesRouter.post('/', async (req, res) => {
   res.status(201).json(newBlog);
 });
 
+blogesRouter.delete('/:id', async (req, res) => {
+  const id = req.params.id;
+  const blog = await Blog.findByIdAndDelete(id);
+  res.status(204).end();
+});
+
+blogesRouter.put('/:id', async (req, res) => {
+  const blog = {
+    ...req.body,
+  };
+  const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, blog, {
+    new: true,
+  });
+  res.json(updatedBlog);
+});
+
 module.exports = blogesRouter;
