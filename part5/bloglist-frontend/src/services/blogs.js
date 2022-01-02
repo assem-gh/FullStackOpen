@@ -20,3 +20,9 @@ export const update = async (id, blog) => {
   const response = await axios.put(`${baseUrl}/${id}`, blog);
   return response.data;
 };
+
+export const remove = async (id) => {
+  const config = { headers: { Authorization: token } };
+  const response = await axios.delete(`${baseUrl}/${id}`, config);
+  return response.data;
+};
