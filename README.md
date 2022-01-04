@@ -61,4 +61,4 @@ Solutions to the Full Stack Open 2021 exercises from university of Helsinky.
 - Communicating with server in a redux application
 - connect
 
-[Solutions](https://github.com/Asem259/FullStackOpen/tree/main/part5)
+[Solutions](https://github.com/Asem259/FullStackOpen/tree/main/part6)
