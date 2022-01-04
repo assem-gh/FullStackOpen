@@ -12,6 +12,18 @@ const Blog = ({ blog, updateBlog, deleteBlog, userName }) => {
     border: '1px solid black',
   };
 
+  const blogDetails = () => {
+    return (
+      <>
+        <p>{blog.url}</p>
+        <div>
+          <span> likes: {blog.likes}</span>{' '}
+          <button onClick={handleLikes}>like</button>
+        </div>
+        <p>{blog.user.userName}</p>
+      </>
+    );
+  };
   const handleLikes = () => {
     const updatedBlog = {
       ...blog,
@@ -27,21 +39,15 @@ const Blog = ({ blog, updateBlog, deleteBlog, userName }) => {
     }
   };
   return (
-    <div style={blogStyle}>
-      <span>{blog.title + ' by ' + blog.author + ' '}</span>
-
+    <div style={blogStyle} className="blog-container">
+      <div>
+        <strong>{blog.title} </strong>
+        <span>by {blog.author}</span>
+      </div>
       <button onClick={() => setVisibility(!visibility)}>
         {visibility ? 'hide' : 'view'}
       </button>
-      {visibility && (
-        <>
-          <p>{blog.url}</p>
-          <div>
-            likes: {blog.likes} <button onClick={handleLikes}>like</button>
-          </div>
-          <p>{blog.user.userName}</p>
-        </>
-      )}
+      {visibility && blogDetails()}
       {visibility && userName === blog.user.userName && (
         <button
           onClick={handleRemove}
@@ -55,10 +61,14 @@ const Blog = ({ blog, updateBlog, deleteBlog, userName }) => {
 };
 
 Blog.propTypes = {
-  blog: PropTypes.object.isRequired,
+  blog: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  }),
   userName: PropTypes.string.isRequired,
-  updateBlog: PropTypes.func.isRequired,
-  deleteBlog: PropTypes.func.isRequired,
+  // updateBlog: PropTypes.func.isRequired,
+  // deleteBlog: PropTypes.func.isRequired,
 };
 
 export default Blog;
