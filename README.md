@@ -1,6 +1,6 @@
 # [Full Stack Open 2021 ](https://fullstackopen.com/en/)
 
-This repository contains solutions to the Full Stack Open 2021 exercises from from university of Helsinky.
+Solutions to the Full Stack Open 2021 exercises from university of Helsinky.
 
 ## Part 0 - [Fundamentals of Web Apps](https://fullstackopen.com/en/part0)
 
@@ -52,5 +52,13 @@ This repository contains solutions to the Full Stack Open 2021 exercises from fr
 - props.children and proptypes
 - Testing React apps
 - End to end testing
+
+[Solutions](https://github.com/Asem259/FullStackOpen/tree/main/part5)
+
+## Part 6 - [State management with Redux](https://fullstackopen.com/en/part6)
+
+- Flux-architecture and Redux
+- Communicating with server in a redux application
+- connect
 
 [Solutions](https://github.com/Asem259/FullStackOpen/tree/main/part5)
