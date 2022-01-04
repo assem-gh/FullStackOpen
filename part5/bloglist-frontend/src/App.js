@@ -44,7 +44,7 @@ const App = () => {
         setNotification(null);
       }, 5000);
     } catch (exception) {
-      setNotification({ type: 'error', msg: 'Wrong Username or PAssword' });
+      setNotification({ type: 'error', msg: 'Wrong Username or Password' });
       setTimeout(() => {
         setNotification(null);
       }, 5000);
@@ -63,6 +63,7 @@ const App = () => {
         throw Error('Please Fill the fields To add new Blog');
 
       const createdBlog = await blogService.create(newBlog);
+      console.log(createdBlog);
       blogFormRef.current.toggleVisibility();
       setBlogs([...blogs, createdBlog]);
       setNotification({

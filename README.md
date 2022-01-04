@@ -45,3 +45,12 @@ This repository contains solutions to the Full Stack Open 2021 exercises from fr
 - Token authentication
 
 [Solutions](https://github.com/Asem259/FullStackOpen/tree/main/part4)
+
+## Part 5 - [Testing React apps](https://fullstackopen.com/en/part5)
+
+- Login in frontend
+- props.children and proptypes
+- Testing React apps
+- End to end testing
+
+[Solutions](https://github.com/Asem259/FullStackOpen/tree/main/part5)

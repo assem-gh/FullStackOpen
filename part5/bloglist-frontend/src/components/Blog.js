@@ -11,13 +11,14 @@ const Blog = ({ blog, updateBlog, deleteBlog, userName }) => {
     marginBottom: '5px',
     border: '1px solid black',
   };
+  const isCreator = blog.user.userName === userName;
 
   const blogDetails = () => {
     return (
       <>
         <p>{blog.url}</p>
         <div>
-          <span> likes: {blog.likes}</span>{' '}
+          <span className="likesCount"> likes: {blog.likes}</span>{' '}
           <button onClick={handleLikes}>like</button>
         </div>
         <p>{blog.user.userName}</p>
@@ -48,7 +49,7 @@ const Blog = ({ blog, updateBlog, deleteBlog, userName }) => {
         {visibility ? 'hide' : 'view'}
       </button>
       {visibility && blogDetails()}
-      {visibility && userName === blog.user.userName && (
+      {visibility && isCreator && (
         <button
           onClick={handleRemove}
           style={{ backgroundColor: 'red', color: 'white' }}

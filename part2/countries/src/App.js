@@ -17,8 +17,7 @@ function App() {
             .then(response => {
                 setcountries(response.data)
             })
-        console.log('effect')
-    }, [])
+         }, [])
 
     const changeHandler = (e) => {
         setSearch(e.target.value)

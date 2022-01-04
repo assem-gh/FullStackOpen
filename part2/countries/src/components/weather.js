@@ -15,9 +15,7 @@ const Weather = ({ capital }) => {
             })
 
     }, [capital])
-    console.log(weather)
-
-
+ 
     return (
 
         <>
