@@ -11,6 +11,7 @@ import Filter from './components/Filter';
 
 const App = () => {
   const notification = useSelector((state) => state.notification);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

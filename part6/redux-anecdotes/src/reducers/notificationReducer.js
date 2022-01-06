@@ -9,8 +9,10 @@ const reducer = (state = null, { type, data }) => {
   }
 };
 
+let timeoutID = 0;
 export const setNotification =
   (userAction, anecdote, time) => async (dispatch) => {
+    clearTimeout(timeoutID);
     dispatch({
       type: 'SET',
       data:
@@ -18,12 +20,13 @@ export const setNotification =
           ? `you voted ${anecdote}`
           : `you created ${anecdote}`,
     });
-    setTimeout(
-          () => dispatch({
-              type: 'REMOVE',
-          }),
-          time*1000
-      );
+    timeoutID = setTimeout(
+      () =>
+        dispatch({
+          type: 'REMOVE',
+        }),
+      time * 1000
+    );
   };
 
 export const setErrorNotification = (error) => ({
