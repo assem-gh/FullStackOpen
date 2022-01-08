@@ -4,9 +4,6 @@ Solutions to the Full Stack Open 2021 exercises from university of Helsinky.
 
 ## Part 0 - [Fundamentals of Web Apps](https://fullstackopen.com/en/part0)
 
-- General info
-- Fundamentals of Web apps
-
 [Solutions](https://github.com/Asem259/FullStackOpen/tree/main/part0)
 
 ## Part 1 - [Introduction to React](https://fullstackopen.com/en/part1)
@@ -62,3 +59,13 @@ Solutions to the Full Stack Open 2021 exercises from university of Helsinky.
 - connect
 
 [Solutions](https://github.com/Asem259/FullStackOpen/tree/main/part6)
+
+## Part 7 - [React router, custom hooks, styling app with CSS and webpack](https://fullstackopen.com/en/part7)
+
+- React-router
+- Custom hooks
+- Styles
+- Webpack
+- Class components
+
+[Solutions](https://github.com/Asem259/FullStackOpen/tree/main/part7)
