@@ -22,6 +22,7 @@ loginRouter.post('/', async (req, res) => {
     token,
     userName: user.userName,
     name: user.name,
+    id: user.id,
   });
 });
 
