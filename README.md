@@ -69,3 +69,13 @@ Solutions to the Full Stack Open 2021 exercises from university of Helsinky.
 - Class components
 
 [Solutions](https://github.com/Asem259/FullStackOpen/tree/main/part7)
+
+## Part 8 - [GraphQL](https://fullstackopen.com/en/part8)
+
+- GraphQL-server
+- React and GraphQL
+- Database and user administration
+- Login and updating the cache
+- Fragments and subscriptions
+
+[Solutions](https://github.com/Asem259/FullStackOpen/tree/main/part8)
