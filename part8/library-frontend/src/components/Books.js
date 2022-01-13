@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { ALL_BOOKS} from '../queries';
+
+import BookByGenre from './BooksByGenre';
+import { GET_ALL_BOOKS } from '../queries';
 
 const Books = (props) => {
   const [books, setBooks] = useState([]);
-  const result = useQuery(ALL_BOOKS);
+  const [genre, setGenre] = useState('');
+
+  const result = useQuery(GET_ALL_BOOKS);
+  console.log('update...component');
+  const booksToShow = genre
+    ? books.filter((book) => book.genres.includes(genre))
+    : books;
 
   useEffect(() => {
+    console.log('update');
     if (result.data) setBooks(result.data.allBooks);
-  }, [result.data]);
+  }, [result.data, genre]);
 
   if (!props.show) {
     return null;
@@ -17,6 +26,7 @@ const Books = (props) => {
   return (
     <div>
       <h2>books</h2>
+      {genre && <p>in genre {genre}</p>}
 
       <table>
         <tbody>
@@ -25,15 +35,16 @@ const Books = (props) => {
             <th>author</th>
             <th>published</th>
           </tr>
-          {books.map((a) => (
+          {booksToShow.map((a) => (
             <tr key={a.title}>
               <td>{a.title}</td>
-              <td>{a.author}</td>
+              <td>{a.author.name}</td>
               <td>{a.published}</td>
             </tr>
           ))}
         </tbody>
       </table>
+      <BookByGenre books={books} setGenre={setGenre} />
     </div>
   );
 };

@@ -54,7 +54,7 @@ const typeDefs = gql`
   type Query {
     bookCount: Int!
     authorCount: Int!
-    allBooks(author: String, genre: String): [Book!]!
+    allBooks(author: ID, genre: String): [Book!]!
     allAuthors: [Author!]!
     me: User
   }
@@ -79,12 +79,12 @@ const resolvers = {
       try {
         let query = {};
         if (author && genre) query = { author, genres: { $in: [genre] } };
-        if (author) query = { author };
+        if (author) query = { author: author };
         if (genre) query = { genres: { $in: [genre] } };
-        const books = Book.find({ query }).populate('author');
+        const books = await Book.find(query).populate('author');
         return books;
       } catch (err) {
-        throw new UserInputError(error.message, {
+        throw new UserInputError(err.message, {
           invalidArgs: args,
         });
       }
@@ -97,7 +97,7 @@ const resolvers = {
       await Book.find({ author: root._id }).countDocuments(),
   },
   Mutation: {
-    addBook: async (root, args) => {
+    addBook: async (root, args, context) => {
       if (!context.currentUser) {
         throw new AuthenticationError('not authenticated');
       }
@@ -128,16 +128,17 @@ const resolvers = {
         });
       }
     },
-    editAuthor: async (root, { name, setBornTo }) => {
+    editAuthor: async (root, args) => {
       try {
-        const author = await authors.findOneAndUpdate(
-          { name, born: setBornTo },
+        const author = await Author.findOneAndUpdate(
+          { name: args.name },
+          { born: args.setBornTo },
           { new: true }
         );
         if (!author) throw new Error('Author not found');
         return author;
       } catch (err) {
-        throw new UserInputError(error.message, {
+        throw new UserInputError(err.message, {
           invalidArgs: args,
         });
       }

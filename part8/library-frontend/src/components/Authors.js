@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { useField } from '../hooks';
 
-import { ALL_AUTHORS, UPDATE_AUTHOR } from '../queries';
+import { GET_ALL_AUTHORS, UPDATE_AUTHOR } from '../queries';
 
 const Authors = (props) => {
   const [authors, setAuthors] = useState([]);
@@ -10,10 +10,9 @@ const Authors = (props) => {
   const { reset: resetName, ...authorName } = useField();
   const { reset: resetBorn, ...born } = useField('number');
 
-  const result = useQuery(ALL_AUTHORS);
+  const result = useQuery(GET_ALL_AUTHORS);
   const [editAuthor] = useMutation(UPDATE_AUTHOR, {
-    refetchQueries: [{ query: ALL_AUTHORS }],
-    onError: (err) => console.log(err),
+    refetchQueries: [{ query: GET_ALL_AUTHORS }],
   });
 
   useEffect(() => {
