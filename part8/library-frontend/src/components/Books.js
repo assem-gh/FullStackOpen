@@ -9,16 +9,13 @@ const Books = (props) => {
   const [genre, setGenre] = useState('');
 
   const result = useQuery(GET_ALL_BOOKS);
-  console.log('update...component');
   const booksToShow = genre
     ? books.filter((book) => book.genres.includes(genre))
     : books;
 
   useEffect(() => {
-    console.log('update');
     if (result.data) setBooks(result.data.allBooks);
   }, [result.data, genre]);
-
   if (!props.show) {
     return null;
   }

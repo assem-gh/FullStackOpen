@@ -5,5 +5,11 @@
   "editor.formatOnSave": true,
   "typescript.preferences.quoteStyle": "single",
   "prettier.singleQuote": true,
-  "eslint.workingDirectories": [{"mode":"auto"}]
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 120
 }

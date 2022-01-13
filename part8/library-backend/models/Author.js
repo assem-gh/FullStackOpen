@@ -5,11 +5,21 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    minlength: 4
+    minlength: 4,
   },
   born: {
     type: Number,
   },
-})
+  books: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: 'Book',
+    },
+  ],
+});
+
+schema.virtual('bookCount').get(function () {
+  return this.books.length;
+});
 
 module.exports = mongoose.model('Author', schema)

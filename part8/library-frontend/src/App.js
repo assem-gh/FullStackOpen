@@ -5,7 +5,8 @@ import Books from './components/Books';
 import NewBook from './components/NewBook';
 import LoginForm from './components/LoginForm';
 import Recommendations from './components/Recommendations';
-import { useApolloClient } from '@apollo/client';
+import { useApolloClient, useSubscription } from '@apollo/client';
+import { BOOK_ADDED, GET_ALL_AUTHORS, GET_ALL_BOOKS } from './queries';
 
 const App = () => {
   const [page, setPage] = useState('authors');
@@ -13,8 +14,43 @@ const App = () => {
   const [error, setError] = useState('');
   const client = useApolloClient();
 
+  if (error) {
+    window.alert(error);
+    setError('');
+  }
+
+  useSubscription(BOOK_ADDED, {
+    onSubscriptionData: ({ subscriptionData }) => {
+      const addedBook = subscriptionData.data.bookAdded;
+      const authorName = addedBook.author.name;
+      window.alert(`Book ${addedBook.title} added`);
+
+      const authorsInStore = client.readQuery({ query: GET_ALL_AUTHORS });
+      const booksInStore = client.readQuery({ query: GET_ALL_BOOKS });
+
+      client.writeQuery({
+        query: GET_ALL_BOOKS,
+        data: {
+          ...booksInStore,
+          allBooks: [...booksInStore.allBooks, addedBook],
+        },
+      });
+      client.writeQuery({
+        query: GET_ALL_AUTHORS,
+        data: {
+          ...authorsInStore,
+          allAuthors: authorsInStore.allAuthors.map((a) =>
+            a.name === authorName ? { ...a, bookCount: a.bookCount + 1 } : a
+          ),
+        },
+      });
+    },
+  });
+
   useEffect(() => {
-    if (!token) setToken(localStorage.getItem('libraryApp-token'));
+    if (!token) {
+      setToken(localStorage.getItem('libraryApp-token'));
+    }
   }, [token]);
 
   const logout = () => {
@@ -25,7 +61,6 @@ const App = () => {
   };
   return (
     <div>
-      <button onClick={logout}> Logout</button>
       <div>
         <button onClick={() => setPage('authors')}>authors</button>
         <button onClick={() => setPage('books')}>books</button>
@@ -46,9 +81,9 @@ const App = () => {
 
       <Books show={page === 'books'} />
 
-      <NewBook show={page === 'add'} />
+      <NewBook setPage={setPage} setError={setError} show={page === 'add'} />
 
-      <Recommendations show={page === 'recommendations'}  />
+      <Recommendations show={page === 'recommendations'}  token={token} />
 
       <LoginForm
         setError={setError}

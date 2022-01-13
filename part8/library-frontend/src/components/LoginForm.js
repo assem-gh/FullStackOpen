@@ -8,6 +8,7 @@ const LoginForm = ({ show, setError, setToken, setPage }) => {
 
   const [login, result] = useMutation(LOGIN, {
     onError: (error) => {
+      console.dir(error);
       setError(error.graphQLErrors[0].message);
     },
   });
